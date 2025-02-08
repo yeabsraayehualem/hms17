@@ -1,4 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_hospital_patient,Patients Access,model_hospital_patient,base.group_user,1,1,1,1
 access_patient_medical_history,Patient Medical History,model_patient_medical_history,base.group_user,1,1,1,1
+access_patient_card_user,access.patient.card,model_patient_card,base.group_user,1,1,1,1
+access_patientlab_test_user,access.patient.lab.test,model_patient_lab_test,base.group_user,1,1,1,1
+access_mri_test,access.mri.test,model_mri_test,base.group_user,1,1,1,1
 

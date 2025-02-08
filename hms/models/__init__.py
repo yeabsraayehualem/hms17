@@ -2,5 +2,9 @@
 
 from . import (
     patient,
-    hr_employee
+    hr_employee,
+    patient_card,
+    product,
+    lab_test,
+    mri_test,
 )

@@ -20,13 +20,16 @@ class Patients(models.Model):
     insurance_provider = fields.Char(string="Insurance Provider")
     insurance_number = fields.Char(string="Insurance Number")
     emergency_contact_relationship = fields.Selection([(i,i.capitalize()) for i in ['husband','wife','father','mother','brother','sister','child','grandfather','grandmother']], string="Emergency Contact Relationship")
-    
+    count_cards= fields.Integer(compute="_count_cards")
     state = fields.Selection([
         ('new', 'New'),
         ('admitted', 'Admitted'),
         ('discharged', 'Discharged'),
     ], string="Status", default='new')
 
+    def _count_cards(self):
+        for rec in self:
+            rec.count_cards = self.env['patient.card'].search_count([('patient_id', '=', rec.id)])
     @api.depends('date_of_birth')
     def _compute_age(self):
         for rec in self:
@@ -42,6 +45,20 @@ class Patients(models.Model):
         return super(Patients, self).create(vals)
 
 
+    def create_card(self):
+        self.env['patient.card'].create({
+            'patient_id': self.id,  
+        })
+
+    def to_card(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Patient Cards',
+            'res_model': 'patient.card',
+            'view_mode': 'tree,form',
+            'domain': [('patient_id', '=', self.id)],
+            'target': 'current',
+        }
 class PatientMedicalHistory(models.Model):
     _name = "patient.medical.history"
     _description = "Patient Medical History"

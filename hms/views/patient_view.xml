@@ -14,7 +14,7 @@
             </tree>
         </field>
     </record>
-    
+
     <record id="seq_hospital_patient" model="ir.sequence">
         <field name="name">Hospital Patient Sequence</field>
         <field name="code">hospital.patient</field>
@@ -30,7 +30,24 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form string="Patient">
+                      
+<header>
+<field name="count_cards" invisible="1"/>
+    <button string="Create Card" name="create_card" type="object" class="btn-primary" invisible="count_cards > 0" />
+</header>            
+                 
                 <sheet>
+                    <div name="button_box" position="inside">
+
+                        <button name="to_card" string="Cards" type="object" class="oe_stat_button">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value fa fa-card">
+                                    <field name="count_cards" invisible="0"/>
+                                </span>
+                                <span class="o_stat_text">Cards</span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="name"/>
@@ -49,7 +66,7 @@
                     </group>
 
                     <notebook>
-                        <page string="Medical History">
+                        <!-- <page string="Medical History">
                             <field name="medical_history">
                                 <tree editable="bottom">
                                     <field name="date"/>
@@ -57,7 +74,7 @@
                                     <field name="treatment"/>
                                 </tree>
                             </field>
-                        </page>
+                        </page> -->
                         <page string="Emergency Contact">
                             <group>
                                 <field name="emergency_contact"/>

@@ -1,0 +1,106 @@
+<odoo>
+    <!-- Patient Card Tree View -->
+    <record id="view_patient_card_tree" model="ir.ui.view">
+        <field name="name">patient.card.tree</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="patient_name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="phone_number"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="seq_patient_card" model="ir.sequence">
+        <field name="name">Patient Card Sequence</field>
+        <field name="code">patient.card</field>
+        <field name="prefix">MRN-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <!-- Patient Card Form View -->
+    <record id="view_patient_card_form" model="ir.ui.view">
+        <field name="name">patient.card.form</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <form string="Patient Card" create="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="patient_name" readonly="1"/>
+                            <field name="age" readonly="1"/>
+                            <field name="gender" readonly="1"/>
+                            <field name="date_of_birth" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="phone_number" readonly="1"/>
+                            <field name="address" readonly="1"/>
+                            <field name="date" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lab Tests">
+                            <field name="lab_test">
+                                <tree editable='bottom' >
+                                    <field name="test_name"/>
+                                    <field name="min_threshold" readonly="1"/>
+                                    <field name="max_threshold" readonly="1"/>
+
+                                    <field name="result"/>
+                                    <field name="status" readonly="1"/>
+                                    <field name="color" readonly="1"/>
+
+
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="MRI">
+                            <field name="mri_test">
+                                <tree editable="bottom">
+                                    <field name="test_type"/>
+                                    <field name="status" readonly="1"/>
+                                    <field name="result" readonly="1"/>
+
+                                </tree>
+
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Patient Card Search View -->
+    <record id="view_patient_card_search" model="ir.ui.view">
+        <field name="name">patient.card.search</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id"/>
+                <field name="patient_name"/>
+                <field name="date"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Patient Card Action -->
+    <record id="action_patient_card" model="ir.actions.act_window">
+        <field name="name">Patient Cards</field>
+        <field name="res_model">patient.card</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Patient Card.
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="patient_lab_test_tree_view" model="ir.ui.view">
+            <field name="name">patient.lab.test.tree</field>
+            <field name="model">patient.lab.test</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="card_id"/>
+                    <field name="test_name"/>
+                    <field name="result"/>
+                    <field name="min_threshold"/>
+                    <field name="max_threshold"/>
+                    <field name="status"/>
+                    <field name="color"/>
+                </tree>
+            </field>
+        </record>
+
+ <record id="lab_test_sequence" model="ir.sequence">
+        <field name="name">Lab Test Sequence</field>
+        <field name="code">lab.test.sequence</field>
+        <field name="prefix">Lab-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+        <!-- Form View -->
+        <record id="patient_lab_test_form_view" model="ir.ui.view">
+            <field name="name">patient.lab.test.form</field>
+            <field name="model">patient.lab.test</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="card_id"/>
+                            <field name="test_name"/>
+                            <field name="result"/>
+                        </group>
+                        <group>
+                            <field name="min_threshold" readonly="1"/>
+                            <field name="max_threshold" readonly="1"/>
+                            <field name="status" readonly="1"/>
+                            <field name="color" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_patient_lab_test" model="ir.actions.act_window">
+            <field name="name">Lab Tests</field>
+            <field name="res_model">patient.lab.test</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        
+    </data>
+</odoo>

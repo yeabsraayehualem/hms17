@@ -24,6 +24,10 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'views/patient_view.xml',
         "views/hr_employee.xml",
+        "views/product.xml",
+        "views/patient_card.xml",
+        "views/lab_test.xml",
+        "views/mri.xml",
         
 
 
@@ -36,8 +40,9 @@ Long description of module's purpose
 
     'assets': {
         'web.assets_backend': [
-            'hms/static/img/patient.png',  
-            
+            'hms/static/img/patient.png',
+            'hms/static/img/laboratory.png',
+            'hms/static/img/mri.png',
         ],
         
     },
