@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+<menuitem id="hospital_main_menu" name="Hospital" web_icon="hms,static/img/patient.png"/>
+
+
+    <menuitem id="menu_hospital_patient" name="Patients"
+              parent="hospital_main_menu" action="action_hospital_patient"/>
+
+</odoo>
