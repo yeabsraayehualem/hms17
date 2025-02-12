@@ -12,10 +12,10 @@
         
                 <menuitem id="menu_lab_test_root" name="Lab Tests" web_icon="hms,static/img/laboratory.png" />
 
-        <menuitem id="menu_lab_test" name="Lab Tests" parent="menu_lab_test_root" action="action_patient_lab_test"/>
+        <menuitem id="menu_lab_test" name="Lab Tests" parent="menu_lab_test_root" action="action_patient_card_lab_test"/>
 
                 <menuitem id="menu_mri_root" name="MRI Tests" web_icon="hms,static/img/mri.png" />
 
-    <menuitem id="mri_tests_menu" name="MRI Tests" parent="menu_mri_root" action="action_mri_test"/>
+    <menuitem id="mri_tests_menu" name="MRI Tests" parent="menu_mri_root" action="action_patient_card_mri_test"/>
 
 </odoo>

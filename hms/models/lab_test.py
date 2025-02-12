@@ -5,12 +5,13 @@ class LabTest(models.Model):
 
     name=fields.Char(string="Reference", default="New")
     card_id = fields.Many2one('patient.card', string='Patient Card')
-    test_name = fields.Many2one('product.template',string='Test Name', domain=[('detailed_type', '=', 'service')])
+    test_name = fields.Many2one('product.template',string='Test Name', domain=[('detailed_type', '=', 'service'),('is_medical','=',True,),('product_type', '=','lab_test')])
     result = fields.Char(string='Result')
     min_threshold = fields.Float(string='Minimum Threshold', related="test_name.min_threshold")
     max_threshold = fields.Float(string='Maximum Threshold', related="test_name.max_threshold")
     status = fields.Integer(string='Status',default=0)
     color = fields.Char(string='Color',default="white")
+    paid= fields.Boolean(default=False)
 
     @api.model
     def create(self, vals):

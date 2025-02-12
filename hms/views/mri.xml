@@ -1,60 +1,105 @@
 <odoo>
-    <!-- MRI Test Tree View -->
-    <record id="view_mri_test_tree" model="ir.ui.view">
-        <field name="name">mri.test.tree</field>
-        <field name="model">mri.test</field>
+    <!-- Patient Card Tree View -->
+    <record id="view_patient_card_tree_mri" model="ir.ui.view">
+        <field name="name">patient.card.tree.mri</field>
+        <field name="model">patient.card</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="mri_test_sequence"/>
-                <field name="card_id"/>
+            <tree create="0">
+                <field name="name"/>
+                <field name="patient_id"/>
                 <field name="patient_name"/>
-                <field name="test_type"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="phone_number"/>
                 <field name="date"/>
-                <field name="status"/>
             </tree>
         </field>
     </record>
-
-    <record id="mri_test_sequence" model="ir.sequence">
-        <field name="name">MRI Test Sequence</field>
-        <field name="code">mri.test.sequence</field>
-        <field name="prefix">MRI-</field>
+    <record id="seq_patient_card" model="ir.sequence">
+        <field name="name">Patient Card Sequence</field>
+        <field name="code">patient.card</field>
+        <field name="prefix">MRN-</field>
         <field name="padding">5</field>
         <field name="company_id" eval="False"/>
     </record>
-    
-    <record id="view_mri_test_form" model="ir.ui.view">
-        <field name="name">mri.test.form</field>
-        <field name="model">mri.test</field>
+    <!-- Patient Card Form View -->
+    <record id="view_patient_card_form_mri" model="ir.ui.view">
+        <field name="name">patient.card.form.mri</field>
+        <field name="model">patient.card</field>
         <field name="arch" type="xml">
-            <form string="MRI Test">
+            <form string="Patient Card" create="0">
+            <header>
+<field name='is_paid' invisible="true"/>
+
+<button string="Pay" type="object" name="make_paid" class="btn btn-primary"  invisible="is_paid" />
+
+            </header>
                 <sheet>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="card_id"/>
+                            <field name="name" readonly="1"/>
+                            <field name="patient_id" readonly="1"/>
                             <field name="patient_name" readonly="1"/>
-                            <field name="date"/>
+                            <field name="age" readonly="1"/>
+                            <field name="gender" readonly="1"/>
+                            <field name="date_of_birth" readonly="1"/>
                         </group>
                         <group>
-                            <field name="test_type"/>
-                            <field name="status"/>
-                            <field name="result"/>
+                            <field name="phone_number" readonly="1"/>
+                            <field name="address" readonly="1"/>
+                            <field name="date" readonly="1"/>
                         </group>
                     </group>
+                    <notebook>
+                       
+
+                        <page string="MRI">
+                            <field name="mri_test">
+                                <tree editable="bottom">
+                                    <field name="test_type"/>
+                                    <field name="status" readonly="1"/>
+                                    <field name="result" readonly="1"/>
+
+                                </tree>
+
+                            </field>
+                        </page>
+                    </notebook>
+                    <div class="o_row text-end">
+                    <div class="o_col">
+                    <label for="total_price" string="Total"/>
+                    <field name="total_price" widget="monatory" readonly="1" />
+                    </div>
+                    </div>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- MRI Test Action -->
-    <record id="action_mri_test" model="ir.actions.act_window">
-        <field name="name">MRI Tests</field>
-        <field name="res_model">mri.test</field>
+    <!-- Patient Card Search View -->
+    <record id="view_patient_card_search" model="ir.ui.view">
+        <field name="name">patient.card.search</field>
+        <field name="model">patient.card</field>
+
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id"/>
+                <field name="patient_name"/>
+                <field name="date"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Patient Card Action -->
+    <record id="action_patient_card_mri_test" model="ir.actions.act_window">
+        <field name="name">Patient Cards</field>
+        <field name="res_model">patient.card</field>
         <field name="view_mode">tree,form</field>
+                         <field name="domain">[('mri_test', '!=', False)]</field>
+
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-                Click to create a new MRI Test.
+                Click to create a new Patient Card.
             </p>
         </field>
     </record>

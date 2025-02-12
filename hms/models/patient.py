@@ -4,6 +4,7 @@ from datetime import date
 class Patients(models.Model):
     _name = "hospital.patient"
     _description = "Patient Information"
+    _order="name desc"
 
     patient_name = fields.Char(string="Name", required=True)
     name = fields.Char(string="Reference", readonly=True, copy=False, default="New")

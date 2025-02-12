@@ -1,61 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-
-        <!-- Tree View -->
-        <record id="patient_lab_test_tree_view" model="ir.ui.view">
-            <field name="name">patient.lab.test.tree</field>
-            <field name="model">patient.lab.test</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="card_id"/>
-                    <field name="test_name"/>
-                    <field name="result"/>
-                    <field name="min_threshold"/>
-                    <field name="max_threshold"/>
-                    <field name="status"/>
-                    <field name="color"/>
-                </tree>
-            </field>
-        </record>
-
- <record id="lab_test_sequence" model="ir.sequence">
-        <field name="name">Lab Test Sequence</field>
-        <field name="code">lab.test.sequence</field>
-        <field name="prefix">Lab-</field>
+    <!-- Patient Card Tree View -->
+    <record id="view_patient_card_tree+lab" model="ir.ui.view">
+        <field name="name">patient.card.tree.lab</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="patient_name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="phone_number"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="seq_patient_card" model="ir.sequence">
+        <field name="name">Patient Card Sequence</field>
+        <field name="code">patient.card</field>
+        <field name="prefix">MRN-</field>
         <field name="padding">5</field>
         <field name="company_id" eval="False"/>
     </record>
-        <!-- Form View -->
-        <record id="patient_lab_test_form_view" model="ir.ui.view">
-            <field name="name">patient.lab.test.form</field>
-            <field name="model">patient.lab.test</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
+    <!-- Patient Card Form View -->
+    <record id="view_patient_card_form_lab" model="ir.ui.view">
+        <field name="name">patient.card.form.lab</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <form string="Patient Card" create="0">
+            <header>
+<field name='is_paid' invisible="true"/>
+
+<button string="Pay" type="object" name="make_paid" class="btn btn-primary"  invisible="is_paid" />
+
+            </header>
+                <sheet>
+                    <group>
                         <group>
-                            <field name="card_id"/>
-                            <field name="test_name"/>
-                            <field name="result"/>
+                            <field name="name" readonly="1"/>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="patient_name" readonly="1"/>
+                            <field name="age" readonly="1"/>
+                            <field name="gender" readonly="1"/>
+                            <field name="date_of_birth" readonly="1"/>
                         </group>
                         <group>
-                            <field name="min_threshold" readonly="1"/>
-                            <field name="max_threshold" readonly="1"/>
-                            <field name="status" readonly="1"/>
-                            <field name="color" readonly="1"/>
+                            <field name="phone_number" readonly="1"/>
+                            <field name="address" readonly="1"/>
+                            <field name="date" readonly="1"/>
                         </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                    </group>
+                    <notebook>
+                        <page string="Lab Tests">
+                            <field name="lab_test">
+                                <tree editable='bottom' >
+                                    <field name="test_name"/>
+                                    <field name="min_threshold" readonly="1"/>
+                                    <field name="max_threshold" readonly="1"/>
 
-        <!-- Action -->
-        <record id="action_patient_lab_test" model="ir.actions.act_window">
-            <field name="name">Lab Tests</field>
-            <field name="res_model">patient.lab.test</field>
-            <field name="view_mode">tree,form</field>
-        </record>
+                                    <field name="result"/>
+                                    <field name="status" readonly="1"/>
+                                    <field name="color" readonly="1"/>
 
-        
-    </data>
+
+                                </tree>
+                            </field>
+                        </page>
+
+                       
+                    </notebook>
+                    <div class="o_row text-end">
+                    <div class="o_col">
+                    <label for="total_price" string="Total"/>
+                    <field name="total_price" widget="monatory" readonly="1" />
+                    </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Patient Card Search View -->
+    <record id="view_patient_card_search" model="ir.ui.view">
+        <field name="name">patient.card.search</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id"/>
+                <field name="patient_name"/>
+                <field name="date"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Patient Card Action -->
+    <record id="action_patient_card_lab_test" model="ir.actions.act_window">
+        <field name="name">Patient Cards</field>
+        <field name="res_model">patient.card</field>
+        <field name="view_mode">tree,form</field>
+         <field name="domain">[('lab_test', '!=', False)]</field>
+        <field name="help" type="html">
+         
+            <p class="oe_view_nocontent_create">
+                Click to create a new Patient Card.
+            </p>
+        </field>
+    </record>
+
 </odoo>

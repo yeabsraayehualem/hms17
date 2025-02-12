@@ -28,6 +28,12 @@
         <field name="model">patient.card</field>
         <field name="arch" type="xml">
             <form string="Patient Card" create="0">
+            <header>
+<field name='is_paid' invisible="true"/>
+
+<button string="Pay" type="object" name="make_paid" class="btn btn-primary"  invisible="is_paid" />
+
+            </header>
                 <sheet>
                     <group>
                         <group>
@@ -73,6 +79,12 @@
                             </field>
                         </page>
                     </notebook>
+                    <div class="o_row text-end">
+                    <div class="o_col">
+                    <label for="total_price" string="Total"/>
+                    <field name="total_price" widget="monatory" readonly="1" />
+                    </div>
+                    </div>
                 </sheet>
             </form>
         </field>

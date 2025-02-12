@@ -30,12 +30,12 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form string="Patient">
-                      
-<header>
-<field name="count_cards" invisible="1"/>
-    <button string="Create Card" name="create_card" type="object" class="btn-primary" invisible="count_cards > 0" />
-</header>            
-                 
+
+                <header>
+                    <field name="count_cards" invisible="1"/>
+                    <button string="Create Card" name="create_card" type="object" class="btn-primary" invisible="count_cards > 0" />
+                </header>
+
                 <sheet>
                     <div name="button_box" position="inside">
 
@@ -46,6 +46,7 @@
                                 </span>
                                 <span class="o_stat_text">Cards</span>
                             </div>
+                            
                         </button>
                     </div>
                     <group>

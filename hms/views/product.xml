@@ -7,6 +7,10 @@
             <field name="inherit_id" ref="product.product_template_form_view"/>  
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='detailed_type']" position="after">
+                <field name="is_medical" />
+                <field name="product_type" invisible="not is_medical"
+                
+                 />
                     <field name="min_threshold" invisible="detailed_type != 'service'"/>
                     <field name="max_threshold" invisible="detailed_type != 'service'"/>
                 </xpath>
